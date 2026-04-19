@@ -1,13 +1,12 @@
-/**
+﻿/**
  * graph-doc-processor
  *
- * Pipeline: detectFormat → extractStructure → resolveReferences → generateSummary → extractQAPairs → triggerIngestion
+ * Pipeline: detectFormat â†’ extractStructure â†’ resolveReferences â†’ generateSummary â†’ extractQAPairs â†’ triggerIngestion
  *
  * Input:  DocProcessorInput  (rawContent, docType, clientId, processingDepth)
  * Output: DocProcessorOutput (oneLiner, abstract, bulletSummary[], qaPairs[], docId, status)
  *
- * TODO: implement nodes under src/nodes/ per PRD.md
- * TODO: implement src/local.ts for Electron mode
+ * Implementation tracked in GitHub issues -- see repo Issues tab.
  */
 
 import { StateGraph, START, END, MemorySaver, StateSchema, UntrackedValue } from '@langchain/langgraph';
@@ -46,13 +45,12 @@ const ProcessorState = new StateSchema({
 
 const standardRetry = { maxAttempts: 3, initialInterval: 1000, backoffFactor: 2 };
 
-// TODO: implement real nodes
-const detectFormatNode      = async (s: any) => ({ phase: 'detect-format', detectedFormat: 'txt', processingMode: 'text' as const });
-const extractStructureNode  = async (s: any) => ({ phase: 'extract-structure', documentOutline: {}, structuralMetrics: {}, rawText: s.rawContent });
-const resolveReferencesNode = async (s: any) => ({ phase: 'resolve-refs', internalRefs: [], externalRefs: [], relatedDocIds: [] });
-const generateSummaryNode   = async (s: any) => ({ phase: 'generate-summary', oneLiner: '', abstract: '', bulletSummary: [] });
-const extractQAPairsNode    = async (s: any) => ({ phase: 'extract-qa', qaPairs: [], qaPairCount: 0 });
-const triggerIngestionNode  = async (s: any) => ({ phase: 'trigger-ingestion', docId: crypto.randomUUID(), ingestedAt: new Date().toISOString(), status: 'processed' });
+import { detectFormatNode }      from './nodes/detectFormat.js';
+import { extractStructureNode }  from './nodes/extractStructure.js';
+import { resolveReferencesNode } from './nodes/resolveReferences.js';
+import { generateSummaryNode }   from './nodes/generateSummary.js';
+import { extractQAPairsNode }    from './nodes/extractQAPairs.js';
+import { triggerIngestionNode }  from './nodes/triggerIngestion.js';
 
 // Conditional: skip QA + ingestion if processingDepth === 'summary-only'
 const routeByDepth = (s: any) => s.processingDepth === 'summary-only' ? END : 'extractQAPairs';
