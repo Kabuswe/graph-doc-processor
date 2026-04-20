@@ -1,29 +1,31 @@
 {
-  "name": "@kabuswe/graph-doc-processor",
-  "version": "0.1.0",
-  "type": "module",
-  "scripts": {
-    "dev": "langgraph dev",
-    "build": "tsc"
-  },
-  "dependencies": {
-    "@aws-sdk/client-dynamodb": "latest",
-    "@aws-sdk/lib-dynamodb": "latest",
-    "@kabuswe/graph-contracts": "^0.3.0",
-    "@langchain/core": "^1.1.40",
-    "@langchain/langgraph": "^1.2.9",
-    "@langchain/langgraph-checkpoint-postgres": "^1.0.0",
-    "@langchain/openrouter": "^0.2.2",
-    "mammoth": "^1.7.0",
-    "pdf-parse": "^1.1.1",
-    "pg": "^8.11.0",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "@types/node": "^25.6.0",
-    "@types/pg": "^8.20.0",
-    "dotenv": "^17.4.2",
-    "tsx": "^4.21.0",
-    "typescript": "^5.4.0"
-  }
+    "name":  "@kabuswe/graph-doc-processor",
+    "version":  "0.1.0",
+    "type":  "module",
+    "scripts":  {
+                    "dev":  "langgraph dev",
+                    "build":  "tsc",
+                    "test":  "vitest run --reporter verbose"
+                },
+    "dependencies":  {
+                         "@aws-sdk/client-dynamodb":  "latest",
+                         "@aws-sdk/lib-dynamodb":  "latest",
+                         "@kabuswe/graph-contracts":  "^0.3.0",
+                         "@langchain/core":  "^1.1.40",
+                         "@langchain/langgraph":  "^1.2.9",
+                         "@langchain/langgraph-checkpoint-postgres":  "^1.0.0",
+                         "@langchain/openrouter":  "^0.2.2",
+                         "mammoth":  "^1.7.0",
+                         "pdf-parse":  "^1.1.1",
+                         "pg":  "^8.11.0",
+                         "zod":  "^3.23.8"
+                     },
+    "devDependencies":  {
+                            "@types/node":  "^25.6.0",
+                            "@types/pg":  "^8.20.0",
+                            "dotenv":  "^17.4.2",
+                            "tsx":  "^4.21.0",
+                            "typescript":  "^5.4.0",
+                            "vitest":  "^3.2.4"
+                        }
 }
